@@ -1,0 +1,27 @@
+<mat-toolbar color="warn">
+	<mat-toolbar-row>
+	  <button mat-icon-button>
+	    <mat-icon  svgIcon="liste" (click)="sidenav.toggle()">menu</mat-icon>
+	  </button>
+	  <h1 style="color:white;font-size:30px;font-family:'Raleway', sans-serif;margin-left:5px; ">Pet Oasis</h1>
+	  <span class="menu-spacer"></span>
+	  <div style="color: white;">
+	    <a style="color:inherit;text-decoration:none;margin-left: 15px;" mat-button [routerLink]="'/profile'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Profile</span></a>
+	    <a style="color:inherit;text-decoration:none;" mat-button [routerLink]="'/fast'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Fast</span></a>
+	    <a style="color:inherit;text-decoration:none;" mat-button [routerLink]="'/contacts'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Create Activity</span></a>
+	    <a style="color:inherit;text-decoration:none;" mat-button [routerLink]="'/create-contact'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Create Activity</span></a>
+	    <a style="color:inherit;text-decoration:none;" mat-button [routerLink]="'/activities'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Create Activity</span></a>
+	    <a style="color:inherit;text-decoration:none;" mat-button [routerLink]="'/create-activity'"><span style="font-size:105%;font-family: 'Raleway', sans-serif;">Create Activity</span></a>
+      
+	  </div>
+	</mat-toolbar-row>
+      
+      </mat-toolbar>
+
+
+
+
+
+
+
+<router-outlet></router-outlet>

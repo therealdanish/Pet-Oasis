@@ -1,0 +1,13 @@
+<div style="position: absolute;right:150px;">
+<h1 style="text-align: center;color: coral">Profile</h1>
+<br>
+<br>
+<h2>Firstname:-  {{user?.displayName}}</h2>
+<div *ngFor="let item of useref$|async">
+	{{item.firstName}}
+	{{item.id}}
+
+
+</div>
+<br>
+<br>
