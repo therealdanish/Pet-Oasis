@@ -1,13 +1,74 @@
-<div style="position: absolute;right:150px;">
-<h1 style="text-align: center;color: coral">Profile</h1>
-<br>
-<br>
-<h2>Firstname:-  {{user?.displayName}}</h2>
-<div *ngFor="let item of useref$|async">
-	{{item.firstName}}
-	{{item.id}}
-
-
+<div style="position: absolute;right:450px; margin-top: 15px">
+		
+		<div *ngFor="let item of useref$|async">
+		<div *ngIf="user.uid == item.id">
+			<mat-card class="lol" >
+			
+	<mat-card-header style="font-size: 200%;text-align:center;font-family:'Raleway', sans-serif;">Profile</mat-card-header>
+	<mat-divider style="margin-top: 5px"></mat-divider>
+	<mat-card-content>
+	<br>
+	<br>
+	
+		<img *ngIf="item.image" [src]="item.image" alt="User image" height="150px" width="300px">
+		
+<div [formGroup]="updateform"  *ngIf="edit == true"class="add-field">
+	<div  mat-dialog-content style="margin-top:40px">
+	  
+			<!input type="file" (change)="upload($event)" accept=".png,.jpg" />	
+	<mat-form-field >
+		
+	    <input  style="font-size: 120%" formControlName="firstName" [disabled]="edit == true ? true : null" ngDefaultControl matInput placeholder="First Name" value={{item.firstName}}>
+	    <mat-error  *ngIf="firstName.invalid ">
+	      First name is required
+	    </mat-error>
+	</mat-form-field>
+	<br>	
+	  <mat-form-field >
+		<input style="font-size: 120%" formControlName="lastName" ngDefaultControl matInput placeholder="Last Name" value={{item.lastName}}>
+		<mat-error *ngIf="lastName.invalid ">
+			Last name is required
+		</mat-error>
+	    
+	  </mat-form-field>
+	  <br>
+	  <mat-form-field>
+		<input style="font-size: 120%" formControlName="role" ngDefaultControl matInput placeholder="Role" value={{item.role}}>
+		<mat-error *ngIf="role.invalid">
+			Role must be valid
+		</mat-error>
+	    
+	  </mat-form-field>
+	  <br>
+	</div>
 </div>
-<br>
-<br>
+	<div [formGroup]="updateform"  *ngIf="edit == false"class="add-field">
+			<div  mat-dialog-content style="margin-top:40px">
+			  
+			<h3>firstName :- {{item.firstName}}</h3>
+				
+				
+			<h3>lastName :- {{item.lastName}}</h3>
+				
+			  
+			  <h3>Role :- {{item.role}}</h3>
+			  <br>
+			</div>
+	
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+		<div *ngIf="edit == false" mat-dialog-actions>
+				<span class="right-align-next-element"></span>
+				<button [disabled]="edit" class="primary-btn" mat-raised-button color="primary" (click)="editdata()">Edit</button>     
+			</div>
+			<div *ngIf="edit == true"  mat-dialog-actions>
+					<span class="right-align-next-element"></span>
+					<button  [disabled]="(firstName.invalid || role.invalid || lastName.invalid)" class="primary-btn" mat-raised-button color="primary" (click)="Update1(updateform)" >Save</button>     
+				</div>
+
+    </mat-card-actions>
+</mat-card>
+</div>
+</div>
+</div>

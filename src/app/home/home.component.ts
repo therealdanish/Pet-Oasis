@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
-
+import { firestore } from 'firebase';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import {usser} from '../auth/profile/profile.component';
+import { Observable } from 'rxjs';
+import {map} from 'rxjs/operators';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,8 +14,20 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   constructor(private auth:AuthService,
-	      private route:Router) { }
+	      private route:Router,
+	      private db:AngularFirestore) { 
+		      this.data=this.db.collection<usser>('Users');
+		      this.data$=this.data.snapshotChanges().pipe(map(actions=>{
+			      return actions.map(action=>{
+				     const id=action.payload.doc.id;
+				     const data=action.payload.doc.data() as usser;
+				     return {id,...data};
+			      });
+		      }));
+	      }
 
+data:AngularFirestoreCollection<usser>;
+data$:Observable<usser[]>;
 user:firebase.User;
 
   ngOnInit() {

@@ -22,6 +22,7 @@ export class AuthService {
 private eventAuthError= new BehaviorSubject<string>("");
 eventAuthError$=this.eventAuthError.asObservable();
 newUser:any;
+strin="";
 
 getCurrentState(){
 	return this.afAuth.authState;
@@ -61,10 +62,13 @@ login(email:string,password:string){
 	this.afAuth.auth.signInWithEmailAndPassword(email,password)
 	.catch(error=>{
 		this.eventAuthError.next(error);
+		
 	})
 	.then(userCredential=>{
 		if(userCredential){
-			this.router.navigate(['/home']); 
+			this.router.navigate(['/home']);
+			
+
 		}
 	})
 }

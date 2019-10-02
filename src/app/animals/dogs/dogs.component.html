@@ -1,0 +1,9 @@
+<h1 style="text-align: center">Dog Categories</h1>
+<br>
+<div style="position: absolute;right:450px;">
+<div *ngFor="let item of cat$|async">
+		<a routerLinkActive="active" [routerLink]="['/dog', item.id]">{{ item.id }}</a>
+</div>
+<br><br>
+</div>
+<router-outlet></router-outlet>

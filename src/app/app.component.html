@@ -1,15 +1,15 @@
-<mat-toolbar color="warn">
+<mat-toolbar style="background-color: greenyellow">
 	<mat-toolbar-row>
-	  <button mat-icon-button>
+	  <button mat-icon-button *ngIf="showsidenav">
 	    <mat-icon  svgIcon="liste" (click)="sidenav.toggle()">menu</mat-icon>
 	  </button>
-	  <h1 style="color:white;font-size:30px;font-family:'Raleway', sans-serif;margin-left:5px; ">Pet Oasis</h1>
+	  <h1 style="color:black;font-size:30px;font-family:'Raleway', sans-serif;margin-left:5px;margin-top: 5px ">Pet Oasis</h1>
 	  <span class="menu-spacer"></span>
-	  <div style="color: white;">
+	  <div style="color: black;">
 	    <a style="color:inherit;text-decoration:none;margin-left: 15px;" mat-button [routerLink]="'/profile'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Profile</span></a>
-	    <a style="color:inherit;text-decoration:none;" mat-button [routerLink]="'/fast'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Fast</span></a>
-	    <a style="color:inherit;text-decoration:none;" mat-button [routerLink]="'/contacts'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Create Activity</span></a>
-	    <a style="color:inherit;text-decoration:none;" mat-button [routerLink]="'/create-contact'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Create Activity</span></a>
+	    <a style="color:inherit;text-decoration:none;" mat-button [routerLink]="'/animals'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Categories</span></a>
+	    <a style="color:inherit;text-decoration:none;" mat-button [routerLink]="'/home'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Home</span></a>
+	    <a style="color:inherit;text-decoration:none;" mat-button [routerLink]="'/register'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Register</span></a>
 	    <a style="color:inherit;text-decoration:none;" mat-button [routerLink]="'/activities'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Create Activity</span></a>
 	    <a style="color:inherit;text-decoration:none;" mat-button [routerLink]="'/create-activity'"><span style="font-size:105%;font-family: 'Raleway', sans-serif;">Create Activity</span></a>
       
@@ -17,6 +17,54 @@
 	</mat-toolbar-row>
       
       </mat-toolbar>
+      <div class="lool">
+      <router-outlet></router-outlet>
+      </div>
+      <mat-sidenav-container style="background-color: greenyellow" >
+		<mat-sidenav #sidenav [opened]="showsidenav" mode="side" style="width:210px">
+		  <mat-nav-list>
+			<mat-accordion style="width:208px" multi="true">
+
+				<mat-expansion-panel [expanded]="true" >
+				  <mat-expansion-panel-header style="font-family: 'Raleway', sans-serif;">
+				    {{first}} Categories
+				  </mat-expansion-panel-header>
+				  	<div *ngFor="let item of first$|async" >
+						
+						<a routerLinkActive="active" style="font-family: 'Raleway', sans-serif;" [routerLink]="[urrl, item.id]">{{ item.id }}</a>
+						
+
+					  </div>
+				  
+			      
+				</mat-expansion-panel>
+			      
+				<mat-expansion-panel>
+				  <mat-expansion-panel-header style="font-family: 'Raleway', sans-serif;">
+				    {{second}} Categories
+				  </mat-expansion-panel-header>
+			      
+				  <div *ngFor="let items of second$|async">
+						
+					<a routerLinkActive="active" style="font-family: 'Raleway', sans-serif;" [routerLink]="[urrl2, items.id]">{{ items.id }}</a>
+					
+
+				  </div>
+			      
+				</mat-expansion-panel>
+			      
+			      </mat-accordion>
+		    
+		  </mat-nav-list>
+		</mat-sidenav>
+		<mat-sidenav-content>
+		  <div class="lolo">
+	      
+		    <router-outlet ></router-outlet>
+		  </div>
+		</mat-sidenav-content>
+	      </mat-sidenav-container>
+      
 
 
 
@@ -24,4 +72,3 @@
 
 
 
-<router-outlet></router-outlet>

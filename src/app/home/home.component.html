@@ -1,8 +1,18 @@
 <div style="margin-left: 15px;">
 <h4 class="mt-4">Home Page</h4>
 <p *ngIf="user">Logged in as: {{ user?.email }} - {{ user?.displayName }}</p>
+<div *ngFor="let data of data$|async" >
+	<div *ngIf="data.id == user.uid">
+		<h1>First Name:- {{data.firstName}}</h1>
+	</div>
+</div>
 
 <button class="btn btn-primary mr-2" *ngIf="!user" (click)="register()">Register</button>
 <button class="btn btn-primary" *ngIf="user" (click)="logout()">Logout</button>
 <button class="btn btn-primary" *ngIf="!user" (click)="login()">Login</button>
+
+<div *ngIf="user">
+	<a routerLink="/animals" routerLinkActive="router-link-active" >Test</a>
+
+</div>
 </div>
