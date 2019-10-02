@@ -1,35 +1,35 @@
-<div class="row">
-	<div class="col-12">
-	  <form #loginForm="ngForm" (ngSubmit)="loginprtl(loginForm)">
-      
-	    <div class="row" *ngIf="authError">
-	      <div class="col-12 alert alert-danger">{{ authError?.message }}</div>
-	    </div>
-      
-	    <div class="row">
-	      <div class="col-12">
-		<label for="email">Email</label>
-		<input ngModel #email="ngModel" name="email" type="email" class="form-control">
+<mat-card class="lole" >
+		<mat-card-header style="font-size: 300%;text-align:center;font-family:'Raleway', sans-serif;">Login</mat-card-header>
+		<mat-divider style="margin-top: 5px"></mat-divider>
+		<mat-card-content>
+	<div [formGroup]="loginform" class="add-field">
+		<div mat-dialog-content style="margin-top:40px">
+		  <br>
+		  <mat-form-field  style="margin-bottom: 20px;width: 200px;font-size: 120%">
+			<input style="font-size: 120%;" formControlName="email" ngDefaultControl matInput placeholder="Email">
+			<mat-error *ngIf="email.invalid ">
+				Email is not valid
+			</mat-error>
+		    
+		  </mat-form-field>
+		  <br>
+		  <mat-form-field style="font-size: 120%">
+			<input  formControlName="password" ngDefaultControl matInput placeholder="Password">
+			<mat-error *ngIf="password.invalid">
+				Password is required
+			</mat-error>
+		    
+		  </mat-form-field>
+		  <br>
+		</div>
 	      </div>
-	    </div>
-      
-	    <div class="row">
-	      <div class="col-12">
-		<label for="password">Password</label>
-		<input ngModel #password="ngModel" name="password" type="password" class="form-control">
-	      </div>
-	    </div>
-      
-	    <div class="row mt-2">
-	      <div class="col-12">
-		<a href="/register">Click here to register</a>
-	      </div>
-      
-	      <div class="col-12">
-		<button class="btn btn-primary" type="submit">Login</button>
-	      </div>
-	    </div>
-      
-	  </form>
-	</div>
-      </div>
+	    </mat-card-content>
+	    <mat-card-actions>
+			<div mat-dialog-actions>
+					<span class="right-align-next-element"></span>
+					<button  [disabled]="email.invalid || password.invalid" class="primary-btn" mat-raised-button style="background-color: greenyellow" (click)="loginprtl(loginform)" >Login</button>
+				      </div>
+	
+	    </mat-card-actions>
+	</mat-card>
+		

@@ -1,51 +1,50 @@
-<br>
-<br>
-<div style="margin-left:15px;position: absolute;right:250px" class="row mt-4">
-<h1 style="text-align: center;">Registration Form</h1>
-<br>
-<br> 
-<div class="col-12">
-	<div class="row" *ngIf="authError">
-	  <div class="col-12 alert alert-danger">
-	    {{ authError?.message }}
-	  </div>
+<mat-card class="lol" >
+	<mat-card-header style="font-size: 200%;text-align:center;font-family:'Raleway', sans-serif;">    Registration Form</mat-card-header>
+	<mat-divider style="margin-top: 5px"></mat-divider>
+	<mat-card-content>
+<div [formGroup]="registration" class="add-field">
+	<div mat-dialog-content style="margin-top:40px">
+	  <mat-form-field>
+		
+	    <input style="font-size: 120%" formControlName="firstName" ngDefaultControl matInput placeholder="First Name">
+	    <mat-error  *ngIf="firstName.invalid ">
+	      First name is required
+	    </mat-error>
+	</mat-form-field>
+
+	  <mat-form-field style="margin-left: 35px;margin-bottom: 20px">
+		<input style="font-size: 120%" formControlName="lastName" ngDefaultControl matInput placeholder="Last Name">
+		<mat-error *ngIf="lastName.invalid ">
+			Last name is required
+		</mat-error>
+	    
+	  </mat-form-field>
+	  <br>
+	  <mat-form-field style="margin-bottom: 20px">
+		<input style="font-size: 120%;" formControlName="email" ngDefaultControl matInput placeholder="Email">
+		<mat-error *ngIf="email.invalid ">
+			Email is not valid
+		</mat-error>
+	    
+	  </mat-form-field>
+	  <br>
+	  <mat-form-field>
+		<input style="font-size: 120%" formControlName="password" ngDefaultControl matInput placeholder="Password">
+		<mat-error *ngIf="password.invalid">
+			Password must contain atleat 1 number
+		</mat-error>
+	    
+	  </mat-form-field>
+	  <br>
 	</div>
-	<form #userRegForm="ngForm" (ngSubmit)="createUser(userRegForm)">
-	  <div class="row">
-	    <div class="col-md-4 mb-2">
-	      <label for="firstName">First name</label>
-	      <input ngModel #firstname="ngModel" name="firstName" type="text" class="form-control" id="firstName">
-	    </div>
-	    <div class="col-md-4 mb-2">
-	      <label for="lastName">Last name</label>
-	      <input ngModel #lastname="ngModel" name="lastName" type="text" class="form-control" id="lastName" value="">
-	    </div>
-	  </div>
-	  <div class="row">
-	    <div class="col-md-8 mb-2">
-	      <label for="email">Email</label>
-	      <input ngModel #email="ngModel" name="email" type="email" class="form-control">
-	    </div>
-	  </div>
-	  <div>
-	    <div class="row">
-	      <div class="col-md-6 mb-2">
-		<label for="password">Password</label>
-		<input ngModel #password="ngModel" name="password" type="password" class="form-control">
-	      </div>
-	    </div>
-	    <div class="row">
-	      <div class="col-md-6 mb-2">
-		<label>Confirm Password</label>
-		<input name="password" type="password" class="form-control">
-	      </div>
-	    </div>
-	    <div class="row">
-	      <div class="col-md-12">
-		<button class="btn btn-primary" type="submit">Submit</button>
-	      </div>
-	    </div>
-	  </div>
-	</form>
       </div>
-    </div>
+    </mat-card-content>
+    <mat-card-actions>
+		<div mat-dialog-actions>
+				<span class="right-align-next-element"></span>
+				<button  [disabled]="email.invalid || password.invalid || email.invalid || lastName.invalid" class="primary-btn" mat-raised-button color="primary" (click)="createUser(registration)" >Submit</button>
+			      </div>
+
+    </mat-card-actions>
+</mat-card>
+	
