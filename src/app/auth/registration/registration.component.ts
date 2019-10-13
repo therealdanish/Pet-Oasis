@@ -27,11 +27,11 @@ export class RegistrationComponent implements OnInit {
 	 this.registration=this.fb.group({
 		 'firstName':['',[
 			 Validators.required,
-			 Validators.minLength(10)
+			 Validators.minLength(5)
 		 ]],
 		 'lastName':['',[
 			Validators.required,
-			Validators.maxLength(10)
+			Validators.minLength(3)
 		]],
 		'email':['',[
 			Validators.required,

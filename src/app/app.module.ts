@@ -11,13 +11,12 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { HomeComponent } from './home/home.component';
 import { environment } from 'src/environments/environment';
-import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule,MatDividerModule, MatExpansionModule,MatFormFieldModule, MatInputModule, MatCardModule } from  '@angular/material';
+import { MatToolbarModule, MatIconModule, MatSidenavModule,MatProgressBarModule, MatListModule, MatButtonModule,MatDividerModule, MatExpansionModule,MatFormFieldModule, MatInputModule, MatCardModule, MatProgressBar } from  '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { AnimalsComponent } from './animals/animals.component';
 import { DetailComponent } from './animals/detail/detail.component';
 import { ErrorComponent } from './animals/error/error.component';
-import { SidenavComponent } from './home/sidenav/sidenav.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CatComponent } from './animals/cat/cat.component';
 import { DogsComponent } from './animals/dogs/dogs.component';
@@ -32,7 +31,7 @@ import { DogsComponent } from './animals/dogs/dogs.component';
     AnimalsComponent,
     DetailComponent,
     ErrorComponent,
-    SidenavComponent,
+   
     CategoriesComponent,
     CatComponent,
     DogsComponent
@@ -51,6 +50,7 @@ import { DogsComponent } from './animals/dogs/dogs.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    MatProgressBarModule,
     MatSidenavModule,
     MatListModule,
     MatFormFieldModule,
