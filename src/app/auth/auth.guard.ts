@@ -3,22 +3,27 @@ import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
-  Resolve
+  Router
 } from '@angular/router';
-import { Observable, timer } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements Resolve<any> {
-  resolve(
+export class AuthGuard implements CanActivate {
+  constructor(
+    private afAuth: AngularFireAuth,
+    private router:Router
+  ) {}
+  async canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<any> {
-    return timer(1000).pipe(
-      map(v => true),
-      tap(v => alert('Only ADMINS allowed here!'))
-    );
+  ): Promise<boolean> {
+    const user = await this.afAuth.auth.currentUser;
+    const isLoggedIn = !!user;
+    if (!isLoggedIn) {
+      this.router.navigate(['/login']);
+    }
+    return isLoggedIn;
   }
 }

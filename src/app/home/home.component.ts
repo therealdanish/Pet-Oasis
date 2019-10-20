@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,AfterContentInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { firestore } from 'firebase';
@@ -6,6 +6,10 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import {usser} from '../auth/profile/profile.component';
 import { Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
+import * as Parallax from 'parallax-js';
+
+declare var Parallax:any;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -34,7 +38,10 @@ user:firebase.User;
 	  this.auth.getCurrentState().subscribe( user=>{
 		  this.user=user;
 	  })
+	 
   }
+  
+  
 
 register(){
 	this.route.navigate(['/register']);

@@ -28,12 +28,13 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-	      
+	      "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+	      "./node_modules/bulma/css/bulma.min.css",
 	      "src/styles.scss"
             ],
             "scripts": [
-		"node_modules/jquery/dist/jquery.min.js"
+		"./node_modules/jquery/dist/jquery.min.js"
+		
 		
 	    ]
           },

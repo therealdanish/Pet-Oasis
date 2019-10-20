@@ -8,16 +8,20 @@
 	  <div style="color: black;">
 	    <a style="color:inherit;text-decoration:none;margin-left: 15px;" mat-button [routerLink]="'/home'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Home</span></a>
 	    <a style="color:inherit;text-decoration:none;" mat-button [routerLink]="'/animals'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Categories</span></a>
-	    <a style="color:inherit;text-decoration:none;" mat-button [routerLink]="'/profile'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Profile</span></a>
-	    <a style="color:inherit;text-decoration:none;" mat-button [routerLink]="'/register'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Register</span></a>
-	  </div>
+	    </div>
+	<span class="fill"></span>
+	<a style="color:inherit;text-decoration:none;" *ngIf='!user' mat-button [routerLink]="'/login'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Login</span></a>
+	<a style="color:inherit;text-decoration:none;" *ngIf='!user' mat-button [routerLink]="'/register'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Register</span></a>
+	<a style="color:inherit;text-decoration:none;" *ngIf='user' mat-button [routerLink]="'/profile'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Profile</span></a>
+	<a style="color:inherit;text-decoration:none;" *ngIf='user' (click)="logout()"mat-button [routerLink]="'/login'"><span style="font-size:105%;font-family:'Raleway', sans-serif;">Logout</span></a>
+
 	  
 	</mat-toolbar-row>
-      
+	
       </mat-toolbar>
-      <div fxFlex class="lool">
+      <div  class="lool" [@routeAnimations]="prepareRoute(outlet)">
 			
-		<router-outlet></router-outlet>
+		<router-outlet #outlet="outlet"></router-outlet>
 		
 	</div>
       
@@ -60,13 +64,14 @@
 		  </mat-nav-list>
 		</mat-sidenav>
 		<mat-sidenav-content>
-		  <div fxFlex class="lolo">
+		  <div  class="lolo" [@routeAnimations]="prepareRoute(outlet)">
 	      
-		    <router-outlet ></router-outlet>
+		    <router-outlet #outlet="outlet"></router-outlet>
 		  </div>
 		</mat-sidenav-content>
 	      </mat-sidenav-container>
 	
+	      
 
 
 

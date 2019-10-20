@@ -1,18 +1,39 @@
-<div style="margin-left: 15px;">
-<h4 class="mt-4">Home Page</h4>
-<p *ngIf="user">Logged in as: {{ user?.email }} - {{ user?.displayName }}</p>
-<div *ngFor="let data of data$|async" >
-	<div *ngIf="data.id == user.uid">
-		<h1>First Name:- {{data.firstName}}</h1>
+<main class="wrapper">
+  <section class="section parallax bg1">
+    <h1 style="font-family:'Raleway', sans-serif;font-size: 600%;color: greenyellow;">Pet Oasis</h1>
+    <p style="color:greenyellow;font-size:200%">
+	    Platform for pets with various breeds
+    </p>
+
+    
+  </section>
+  <a [routerLink]="'/animals'">
+  <section class="section static">
+    <h1 style="text-align:center;font-size:300%;color: greenyellow;">Categories</h1><br><br>
+    <p style="font-size:150%">There are around <span style="color:greenyellow">2 million</span> species of animals on Earth, out of which only <span style="color:greenyellow">500</span> species are considered pets. Pets are very compassionate and caring for you. They will do literally anything for you no matter what. Dogs and cats are the most common types of pets. They are the animals most people consider first, and they make some of the best pets.</p>
+  </section>
+</a>
+  <section class="section parallax bg2">
+    <h1>SO FWUFFY AWWW</h1>
+  </section>
+  <section class="section static">
+	<h1 style="text-align:center;font-size:300%;color: greenyellow;">Blogs</h1><br><br>
+	<p style="font-size:150%"> Let people know about stories and explore other users intersting stories </p>
+      </section>
+  <section class="section parallax bg3">
+	<h1>Such Adorableness</h1>
+      </section>
+     
+      <footer class="footer" style="background-color: greenyellow;" >
+	<div class="content has-text-centered">
+	  <p>
+	    <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+	    <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+	    is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+	  </p>
 	</div>
-</div>
-
-<button class="btn btn-primary mr-2" *ngIf="!user" (click)="register()">Register</button>
-<button class="btn btn-primary" *ngIf="user" (click)="logout()">Logout</button>
-<button class="btn btn-primary" *ngIf="!user" (click)="login()">Login</button>
-
-<div *ngIf="user">
-	<a routerLink="/animals" routerLinkActive="router-link-active" ><h1>Test</h1></a>
-
-</div>
+      </footer>
+</main>
+<div style="height: 0vh;">
+<router-outlet></router-outlet>
 </div>

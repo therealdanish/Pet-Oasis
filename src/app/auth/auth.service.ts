@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Observable, pipe } from 'rxjs';
@@ -24,9 +24,12 @@ eventAuthError$=this.eventAuthError.asObservable();
 newUser:any;
 strin="";
 
+
+
 getCurrentState(){
 	return this.afAuth.authState;
 }
+
 
 createUser(user){
 	console.log(user);
