@@ -6,7 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { AnimalsComponent } from './animals/animals.component';
 import { DetailComponent } from './animals/detail/detail.component';
-import { AuthGuard } from './auth/auth.guard';
+import { AuthGuard } from './auth/auth.guard'
 import { PreloadGuard } from './animals/preload.guard';
 import { ErrorComponent } from './animals/error/error.component';
 import { CatComponent } from './animals/cat/cat.component';
@@ -28,20 +28,24 @@ const routes: Routes = [
 	{
 		path:'home',
 		component:HomeComponent,
+		data:{animation:'HomePage'}
 		
 	},
 	{
 		path:'profile',
-		component:ProfileComponent
+		component:ProfileComponent,
+		canActivate:[AuthGuard]
 
 	},
 	{
 		path:'animals',
 		component:AnimalsComponent,
+		data:{animation:'CatPage'}
 	},	
 	{
 	path:'animals/cat',
 	component:CatComponent,
+	canActivate:[AuthGuard],
 	children:[
 			{
 				path:':id',
@@ -53,6 +57,7 @@ const routes: Routes = [
 	{
 	path:'animals/dog',
 	component:DogsComponent,
+	canActivate:[AuthGuard],
 	children:[
 			{
 				path:':id',
@@ -65,7 +70,7 @@ const routes: Routes = [
 	
 	{
 		path:'',
-		redirectTo: '/login',
+		redirectTo: '/home',
 		pathMatch: 'full'
 	},
 	{

@@ -20,6 +20,10 @@ import { ErrorComponent } from './animals/error/error.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CatComponent } from './animals/cat/cat.component';
 import { DogsComponent } from './animals/dogs/dogs.component';
+import { MzParallaxModule } from 'ngx-materialize';
+import { MzCardModule } from 'ngx-materialize';
+import {AuthService} from './auth/auth.service';
+import{AuthGuard} from './auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,6 @@ import { DogsComponent } from './animals/dogs/dogs.component';
     AnimalsComponent,
     DetailComponent,
     ErrorComponent,
-   
     CategoriesComponent,
     CatComponent,
     DogsComponent
@@ -42,10 +45,12 @@ import { DogsComponent } from './animals/dogs/dogs.component';
     AngularFireAuthModule,
     AngularFireModule,
     MatCardModule,
+    MzCardModule,
     MatDividerModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp( environment.firebase),
     FormsModule,
+    MzParallaxModule,
     MatInputModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -59,7 +64,10 @@ import { DogsComponent } from './animals/dogs/dogs.component';
     HttpClientModule,
     MatExpansionModule
   ],
-  providers: [],
+  providers: [
+	AuthGuard,
+	AuthService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

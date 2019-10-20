@@ -1,14 +1,19 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import {descrip} from './animals/animals.component';
 import {map} from 'rxjs/operators';
+import { AuthService } from './auth/auth.service';
+import { slideInAnimation } from './animations';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations:[
+	  slideInAnimation
+  ]
 })
 export class AppComponent {
   title = 'petoasis';
@@ -21,11 +26,16 @@ export class AppComponent {
   second$;
   cat:AngularFirestoreCollection<descrip>;
   dog:AngularFirestoreCollection<descrip>;
+  user:firebase.User;
 
+  prepareRoute(outlet: RouterOutlet) {
+	return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+      }
 
   constructor(private bn: MatIconRegistry,
 	       private bb: DomSanitizer,
 	       private route:Router,
+	       private auth:AuthService,
 	       private db:AngularFirestore){
 		       this.cat=this.db.collection<descrip>('Cat');
 		       this.dog=this.db.collection<descrip>('Dog');
@@ -84,8 +94,17 @@ export class AppComponent {
 			       }
 		       })	
 		}
+		logout(){
+			this.auth.logout();
+				
+		}
+		ngOnInit() {
+			this.auth.getCurrentState().subscribe( user=>{
+				this.user=user;
+		})
+	}
   
 
-	
+		
 	}
 
