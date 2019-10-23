@@ -5,17 +5,19 @@
 			<mat-card class="lol" >
 			
 	<mat-card-header style="font-size: 200%;text-align:center;font-family:'Raleway', sans-serif;">Profile</mat-card-header>
-	<mat-divider style="margin-top: 5px"></mat-divider>
+	<mat-divider style="margin-top: 5px;"></mat-divider>
 	<mat-card-content>
-	<br>
-	<br>
+		<br>
+	
+	
 	
 		<img *ngIf="item.image" [src]="item.image" alt="User image" height="150px" width="300px">
+		
 		
 <div [formGroup]="updateform"  *ngIf="edit == true"class="add-field">
 	<div  mat-dialog-content style="margin-top:40px">
 	  
-			<!input type="file" (change)="upload($event)" accept=".png,.jpg" />	
+			<input type="file" (change)="upload($event)" accept=".png,.jpg" />	
 	<mat-form-field >
 		
 	    <input  style="font-size: 120%" formControlName="firstName" [disabled]="edit == true ? true : null" ngDefaultControl matInput placeholder="First Name" value={{item.firstName}}>
@@ -39,19 +41,20 @@
 		</mat-error>
 	    
 	  </mat-form-field>
+	  
 	  <br>
 	</div>
 </div>
 	<div [formGroup]="updateform"  *ngIf="edit == false"class="add-field">
-			<div  mat-dialog-content style="margin-top:40px">
+			<div  mat-dialog-content style="margin-top:40px;font-family: 'Raleway', sans-serif;font-size: 150%;">
 			  
-			<h3>firstName :- {{item.firstName}}</h3>
-				
-				
-			<h3>lastName :- {{item.lastName}}</h3>
-				
-			  
-			  <h3>Role :- {{item.role}}</h3>
+			<h2><b>FirstName :- {{item.firstName}}</b></h2>
+				<br>
+			<h2><b>LastName :- {{item.lastName}}</b></h2>
+				<br>
+			<h2><b>Role :- {{item.role}}</b></h2>
+			<br>
+			<h2><b>Email :- {{item.email}}</b></h2>
 			  <br>
 			</div>
 	

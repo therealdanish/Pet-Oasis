@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../auth.service';
 import{AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection} from '@angular/fire/firestore';
+import{AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask}from '@angular/fire/storage';
 import { Observable } from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, tap, finalize} from 'rxjs/operators';
 import {AngularFireAuth} from '@angular/fire/auth';
 import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 export interface usser{firstname:string;lastname:string;role:string;id?:string;email:string;image:string};
@@ -13,15 +14,21 @@ export interface usser{firstname:string;lastname:string;role:string;id?:string;e
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
+
 export class ProfileComponent implements OnInit {
 
+
 	usercolref:AngularFirestoreCollection<usser>;
+	usercolrefs:AngularFirestoreCollection<usser>;
 	useref$:Observable<usser[]>;
-	uid=this.af.authState.pipe(
-		map(AuthState=>{
-			return AuthState.uid;
-		})
-	)
+	file:File;
+	task:AngularFireUploadTask;
+	snapshot: Observable<any>;
+	ref: AngularFireStorageReference;
+	user:firebase.User;
+	downloadURL:string;
+	idd="";
+	urk="";
 	edit=false;
 	editdata(){
 		
@@ -34,9 +41,13 @@ export class ProfileComponent implements OnInit {
   constructor(private auth:AuthService,
 	       private readonly db:AngularFirestore,
 	       private af:AngularFireAuth,
-	       private fb:FormBuilder) { 
+	       private fb:FormBuilder,
+	       private storage: AngularFireStorage) { 
 		this.auth.getCurrentState().subscribe(user=>{
-			this.user=user;})
+			this.user=user;
+			this.idd=user.uid;})
+
+				
 		this.updateform=this.fb.group({
 			'firstName':[{value:'',disabled:(this.edit)},[
 				Validators.required,
@@ -61,7 +72,7 @@ export class ProfileComponent implements OnInit {
 		      }));
 		console.log(this.edit);
 		}
-  user:firebase.User;
+  
 
   Update1(frm){
 	  
@@ -81,18 +92,28 @@ get email(){
 get role(){
 	return this.updateform.get('role');
 }
+upload(event){
+	const path= Math.random().toString(36).substring(2);
+	const refa = this.storage.ref(path);
+	this.file=event.target.files[0];
+	this.task = this.storage.upload(path,this.file);
+
+	this.task.snapshotChanges().pipe(
+		finalize(() => {
+		  refa.getDownloadURL().subscribe(url => {
+		    this.urk=JSON.stringify(url);
+		    this.urk=this.urk.replace(/"/g,"");
+		    this.usercolref.doc(this.user.uid).set({image:this.urk},{merge:true});
+		    console.log(this.urk); 
+		  });
+		})
+	      ).subscribe();
+	
+}
   
   
 
-  ngOnInit() {
-	  
-	  
- 
-
-	 
-		
-	  
-  }
+  ngOnInit() {}
 }
      
 

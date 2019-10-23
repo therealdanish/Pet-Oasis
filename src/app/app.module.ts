@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
-import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFirestoreModule, AngularFirestore} from '@angular/fire/firestore';
 import{FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,13 +17,13 @@ import { ProfileComponent } from './auth/profile/profile.component';
 import { AnimalsComponent } from './animals/animals.component';
 import { DetailComponent } from './animals/detail/detail.component';
 import { ErrorComponent } from './animals/error/error.component';
-import { CategoriesComponent } from './categories/categories.component';
 import { CatComponent } from './animals/cat/cat.component';
 import { DogsComponent } from './animals/dogs/dogs.component';
 import { MzParallaxModule } from 'ngx-materialize';
 import { MzCardModule } from 'ngx-materialize';
 import {AuthService} from './auth/auth.service';
 import{AuthGuard} from './auth/auth.guard';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,6 @@ import{AuthGuard} from './auth/auth.guard';
     AnimalsComponent,
     DetailComponent,
     ErrorComponent,
-    CategoriesComponent,
     CatComponent,
     DogsComponent
   ],
@@ -67,6 +66,7 @@ import{AuthGuard} from './auth/auth.guard';
   providers: [
 	AuthGuard,
 	AuthService,
+	AngularFireStorage
   ],
   bootstrap: [AppComponent]
 })
